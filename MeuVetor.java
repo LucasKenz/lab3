@@ -33,16 +33,34 @@ public class MeuVetor {
         // estar vazio quer dizer a ultima posição é -1
     }
 
-    public boolean adiciona (int e){
-
-        // if (estaCheio()){
-        //     return false;
-        // }
-        ultimaPos++;
-
-        v[ultimaPos] = e;
-        return true; 
+    //redimensionar vetor não pertence a nínguem e so a classe, colocar private encapsular
+    private void redimensiona(int novaCapacidade) {
+        int[] temp = new int[novaCapacidade];
+        //redimensionamos com o novacapacidade
+            //perceba que a única coisa diferente entre os códigos de adiciona e remove é o tamanho
+            // fazer a cópia
+            for (int i = 0; i <=ultimaPos; i++){
+                temp[i] = v[i];
+            }
+            v = temp;
     }
+    
+    public void adiciona (int e){
+        if (estaCheio()) {
+            redimensiona(v.length*2);
+        }
+        v[++ultimaPos] = e;
+    }
+
+    public int remove(){
+        if (estaVazio()) return 0;
+        int aux = v[ultimaPos--];
+        if (v.length>=10 && ultimaPos <= v.length/4){
+            redimensiona(v.length/2);
+        } 
+        return aux;
+    }
+
     @Override
     public String toString(){
         String s = "";
@@ -55,15 +73,6 @@ public class MeuVetor {
             }
         }
         return s + "\n";
-        // quero olhar dentro do vetor, não usaremos um comando para exibir o vetor
-        // por que? MVC, modelo, visão, controle
-            // modelo pra exibir, visão para mandar para o BD por exemplo, e o controle que controla para onde vai
-            // essa classe é de vetor, não temos nenhum print aqui
-        // i < v.length é ruim, pois apenas estamos jogando todo o vetor, queremos que não mostre quando está vazio ou que mostre se há algum vetor
-        //mudamos para i<ultimaPos
-        // minha ultimaPos é -1, mas 0 < -1? não, logo não mostrará nada
-        // quando o marcador de ultimaPos é -1, indica que o vetor está vazio
-        // criaremos um teste para ver se está vazio, ou seja se a ultimaPos == -1; -1 indica que está vazio, porque definimos essa convenção
     }
 
 }
