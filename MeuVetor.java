@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class MeuVetor {
@@ -100,7 +101,35 @@ public class MeuVetor {
                     v[j] = v[j+1];
                     v[j+1] =aux;
                 }
+                System.out.println("Passo bubble: " + i + ": " + Arrays.toString(v));
             }
+        }
+    }
+    public void selectionSort(){
+        for (int i = 0; i < v.length-1; i++){
+            int menor = i;
+            for (int j = i+1; j < v.length; j++){
+                if (v[j] > v[menor]){
+                    // troquei o sinal de < para > para desordenar, colocar em decrescente e depois reordenar
+                    menor = j;
+                }
+            }
+            double aux = v[i];
+            v[i] = v[menor];
+            v[menor] = aux;
+            System.out.println("Passo select: " + (i + 1) + ": " + Arrays.toString(v));
+        }
+    }
+    public void insertionSort(){
+        for (int i = 1; i < v.length; i++){
+            double aux = v[i];
+            int j = i-1;
+            while (j>=0 && v[j] > aux){
+                v[j+1] = v[j];
+                j--;
+            }
+            v[j+1] = aux;
+            System.out.println("Passo insert:"  + i + ": " + Arrays.toString(v));
         }
     }
     public void preencheVetor () {
