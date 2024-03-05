@@ -1,8 +1,11 @@
+import java.util.Random;
+
 public class MeuVetor {
-    private int [] v;
+    private double [] v;
     private int ultimaPos;
+
     public MeuVetor (int capacidade){
-        v = new int[capacidade];
+        v = new double[capacidade];
         ultimaPos = -1; 
     }
 
@@ -11,7 +14,7 @@ public class MeuVetor {
         return ultimaPos;
     }
 
-    public int[] getV(){
+    public double[] getV(){
         return v;
     }
 
@@ -35,7 +38,7 @@ public class MeuVetor {
 
     //redimensionar vetor não pertence a nínguem e so a classe, colocar private encapsular
     private void redimensiona(int novaCapacidade) {
-        int[] temp = new int[novaCapacidade];
+        double[] temp = new double[novaCapacidade];
         //redimensionamos com o novacapacidade
             //perceba que a única coisa diferente entre os códigos de adiciona e remove é o tamanho
             // fazer a cópia
@@ -45,16 +48,17 @@ public class MeuVetor {
             v = temp;
     }
     
-    public void adiciona (int e){
+    public void adiciona (double e){
+        // o adiciona recebe inteiro e deve mudar, para double?
         if (estaCheio()) {
             redimensiona(v.length*2);
         }
         v[++ultimaPos] = e;
     }
 
-    public int remove(){
+    public double remove(){
         if (estaVazio()) return 0;
-        int aux = v[ultimaPos--];
+        double aux = v[ultimaPos--];
         if (v.length>=10 && ultimaPos <= v.length/4){
             redimensiona(v.length/2);
         } 
@@ -69,10 +73,48 @@ public class MeuVetor {
         }
         else {
             for (int i=0; i<=ultimaPos; i++){
-                s = s + v[i] + " ";
+                s = s + String.format("%.0f ", v[i]);
             }
         }
         return s + "\n";
     }
+    public void bubbleSort(){
+        for (int i = 1; i < v.length; i ++){
+            // conforme o i aumenta reduzo o número de comparações, que é o laço seguinte, já que é o length - i, quando i = 1, faço 0-1, 1-2, 2-3, 3-4, quando o i = 2 faço 0-1, 1-2, 2-3...
+            for (int j = 0; j< v.length-i; j++){
+                if (v[j] > v[j+1]){
+                    // se eu trocar o sinal para <, a ordenação vai ficar em ordem decrescente
+                    // j faz o controle do índice
+
+                    // imaginar que a=5, b=3, como trocar os valores?
+                    //nomeio um variavel aux = a
+                    //a = b
+                    // b = aux
+                    // desse jeito formamos uma cópia , custa memória
+                    // ou
+                    // a = a+b = 8
+                    // b = a-b = 5
+                    // a = a-b = 3
+                    // esse é outro jeito, custo processamento
+                    double aux = v[j];
+                    v[j] = v[j+1];
+                    v[j+1] =aux;
+                }
+            }
+        }
+    }
+    public void preencheVetor () {
+        Random r = new Random();
+        for (int i = 0; i < v.length; i++){
+            //adiciona(Math.random()); // lembrar que como da valores de 0-1, doubles, e tentamos atribuir isso a um int, da erro
+            // vamos retarurar código
+            // programar aprendendo genetics
+            // mudamos todos os ints para double
+
+            adiciona(r.nextInt(v.length*10) +1);
+            // perceba que estou ligando com o tamanho do vetor randomico
+        }
+    }
 
 }
+
