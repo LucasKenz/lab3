@@ -80,30 +80,20 @@ public class MeuVetor {
         return s + "\n";
     }
     public void bubbleSort(){
+        //int cont=0;
         for (int i = 1; i < v.length; i ++){
             // conforme o i aumenta reduzo o número de comparações, que é o laço seguinte, já que é o length - i, quando i = 1, faço 0-1, 1-2, 2-3, 3-4, quando o i = 2 faço 0-1, 1-2, 2-3...
             for (int j = 0; j< v.length-i; j++){
+                //cont++;
                 if (v[j] > v[j+1]){
-                    // se eu trocar o sinal para <, a ordenação vai ficar em ordem decrescente
-                    // j faz o controle do índice
-
-                    // imaginar que a=5, b=3, como trocar os valores?
-                    //nomeio um variavel aux = a
-                    //a = b
-                    // b = aux
-                    // desse jeito formamos uma cópia , custa memória
-                    // ou
-                    // a = a+b = 8
-                    // b = a-b = 5
-                    // a = a-b = 3
-                    // esse é outro jeito, custo processamento
                     double aux = v[j];
                     v[j] = v[j+1];
                     v[j+1] =aux;
                 }
-                System.out.println("Passo bubble: " + i + ": " + Arrays.toString(v));
+                // System.out.println("Passo bubble: " + i + ": " + Arrays.toString(v));
             }
         }
+        //return cont;
     }
     public void selectionSort(){
         for (int i = 0; i < v.length-1; i++){
