@@ -134,6 +134,53 @@ public class MeuVetor {
             // perceba que estou ligando com o tamanho do vetor randomico
         }
     }
+    public Retorno buscaSimples (double e){
+        Retorno r = new Retorno();
+        if (estaVazio()) return r;
+        // não preciso de um else por que o return ja sai do método
+        for (int i = 0; i<=ultimaPos; i++) {
+            r.incrementaCont();
+           // poderia usar também o < v.length, existe uma diferença 
+            if (v[i] == e){
+                r.setAchou(true);
+                 return r; 
+            }
+        }
+        return r;
+        
+    }
+    // public boolean buscaSimples (int e){
+    //     if (estaVazio()) return false;
+    //     // não preciso de um else por que o return ja sai do método
+    //     for (int i = 0; i<=ultimaPos; i++) {
+    //        // poderia usar também o < v.length, existe uma diferença 
+    //         if (v[i] == e) return true; 
+    //         
+    //        }
+    //        return false;
+    // }
+    // assim estaria certo, atentar para o return que tem que estar fora do {} do for
 
+    public Retorno buscaBinaria (double e){
+        Retorno r = new Retorno();
+        if (estaVazio()) return r;
+        int inicio = 0;
+        int fim = ultimaPos;
+        while (inicio <= fim){
+            r.incrementaCont(2);
+            int meio = (inicio + fim)/2;
+            if (v[meio] == e) {
+                r.setAchou(true);
+                return r;
+                // até aqui fizemos o mesmo da busca simples
+                // agora como temos dois ifs, vai fazer a busca mais vezes, vamos usar a sobrecarga no incrementaCont
+            }
+            if (v[meio] < e) inicio = meio + 1;
+            else fim = meio - 1;
+        }
+        return r;
+        // busca binária so funciona se o vetor tiver ordenado
+        // esse return r armazena em r o valor de r, e o return r; retorna o valor de r, feita sempre que um vertor novo é criado, somente deixando na pilha de execução o que é necessário e liberando, não é estático
+    }
 }
 
