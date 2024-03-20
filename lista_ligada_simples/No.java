@@ -24,4 +24,5 @@ public class No{
         // lembrando é uma sobrescrita
         return "|" + info + "|->";
     }// no pronto
+    //estudar esses sets e gets em forma de caixinha
 }

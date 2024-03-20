@@ -42,7 +42,7 @@ public class Lista {
         }
         else {
             No temp = primeiro;
-            while(temp.getProximo() != null){
+            while(temp.getProximo() != null){ // percorrendo até o último elemento
                 temp = temp.getProximo(); // aqui vemos a representação de pegar um valor até o proximo ser diferente de null
                 // enquanto isso temp assumirá o tamanho desse próximo
             }
@@ -50,6 +50,27 @@ public class Lista {
             // o problema é que quanto maior a lista mais demorado é para achar um pecinha
         }
     }
+
+    // public void insereP (int i, int pos){
+    //     No novo = new No(i);
+    //     if (estaVazia()){
+    //         primeiro = novo;
+    //     }
+    //     else if(pos == 1){
+    //         novo.setProximo(primeiro)
+    //         primeiro = novo;
+    //     }
+    //     else {
+    //         No aux = primeiro;
+    //         int cont = 1;
+    //         while (aux.getProximo() != null || cont < pos -1){
+    //             aux = aux.getProximo();
+    //             cont ++;
+    //         }
+    //         novo.setProximo(aux.getProximo());
+    //         aux.setProximo(novo);
+    //     }
+    // }
 
     public int removeInicio(){
         // guardar elemento da primeira posição
@@ -59,7 +80,7 @@ public class Lista {
         return aux;
     }
     // ex1: feito
-    public int removeFim(){
+    public int removeFim(){ // perceba que não podemos parar no último se quisermos remover o último temos que aprar no penultimo
         No ultimoNo = primeiro;
         No penultimoNo = ultimoNo;
         // verificar qual o último no e colocar no valor
@@ -72,6 +93,25 @@ public class Lista {
         } 
         penultimoNo.setProximo(null);
         return ultimoNo.getInfo();
+    }
+
+       // anotações da machion
+    public int removeFim2() {
+        int aux;
+        if (primeiro.getProximo() == null){ // se o proximo do primeiro ( na caixa é o segundo quadrado) apontar para null então sabemos que so tem 1
+            //se o proximo do primeiro for nulo então so tem 1
+            aux = primeiro.getInfo();
+            primeiro = null; //esvaziou a lista
+        }
+        else {
+            No temp = primeiro;
+            while(temp.getProximo().getProximo() != null){ // significa que agopra pega 2 na frente, o penultimo
+                temp =  temp.getProximo();
+            }
+            aux = temp.getProximo().getInfo(); // estamos posicionados e pegamos a informação da caixinha
+            temp.setProximo(null);
+        }
+        return aux;
     }
 
     @Override
