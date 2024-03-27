@@ -203,25 +203,28 @@ public class MeuVetor {
          // mudei o cont e o get cont para double
     }
 
-    // construir um metodo para encontrar o maior e remover da lista
-    // public boolean removeMaior(){
-    //     if (estaVazio()){
-    //         return false;
-    //     }
-    //     else{
-    //         if (estaCheio()){
-    //             return true;
-    //         }
-    //     }
-    //     double maior = v[0];
-    //     int pos = -1;
-    //     for (int i = 1; i<=ultimaPos; i++){
-    //         if(v[i] > maior){
-    //             maior = v[i];
+    //construir um metodo para encontrar o maior e remover da lista
+    public boolean removeMaior(){
+        if (estaVazio()){
+            return false;
+        }
+        double maior = v[0];
+        int pos = 0; // conectei o maior com a posição dele
+        for (int i = 1; i<=ultimaPos; i++){
+            if(v[i] > maior){
+                maior = v[i];
+                pos = i;
                 
-    //         }
-    //     }
-    // }
+            }
+        }
+        // agora a ideia é pegar a posição, arrastar todos da direita incluoindo a posição para a  esquerda e a ultimaPos também
+        for (int i = pos; i <= ultimaPos; i++){
+            v[i] = v[i+1];
+            // vai da posição que eu quero remover até a ultima posição, e vai deslocando os elementos para a esquerda
+        }
+        ultimaPos--;
+        return true;        
+    }
 
 
     //1. inserir elemento em determinada posição **
