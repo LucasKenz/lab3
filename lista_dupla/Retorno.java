@@ -1,8 +1,8 @@
 public class Retorno {
-    private double cont;
+    private int cont;
     private boolean achou;
     //construtor padrão = zera tudo
-    public double getCont(){
+    public int getCont(){
         return cont;
     }
     public boolean getAchou(){
@@ -18,13 +18,12 @@ public class Retorno {
         cont += k;
     }
 
-    public void setCont (double n) {
-        cont = n;
-    }
-
     public void setAchou(boolean achou){
         this.achou = achou;
         // se achou = achou, o compilador enxerga curto, o achou somente existe naquela variável, então se tiver a ambiguidade usar o this
     }
     // agora mudamos as buscas no MeuVetor para retornar um objeto do tipo Retorno
+    public void setCont(int valor){
+        cont = valor;
+    }
 }

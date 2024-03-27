@@ -184,7 +184,47 @@ public class MeuVetor {
         // esse return r armazena em r o valor de r, e o return r; retorna o valor de r, feita sempre que um vertor novo é criado, somente deixando na pilha de execução o que é necessário e liberando, não é estático
     }
 
-    //inserir elemento em determinada posição **
+    //construir um método para encontrar o maior elemento e devolvê-lo (usar a classe retorno)
+    public Retorno encontraMaior(){
+        Retorno r = new Retorno();
+        if (estaVazio()){
+            r.setAchou(false);
+            return r;
+        }
+        double maior = v[0];
+        for (int i = 1; i<=ultimaPos; i++){ // vai do 2 para frente, do indice 1 para frente por causda de i = 1
+            if(v[i] > maior){
+                maior = v[i];
+            }
+            r.setCont(maior);
+            r.getCont();
+        }
+        return r;
+         // mudei o cont e o get cont para double
+    }
+
+    // construir um metodo para encontrar o maior e remover da lista
+    // public boolean removeMaior(){
+    //     if (estaVazio()){
+    //         return false;
+    //     }
+    //     else{
+    //         if (estaCheio()){
+    //             return true;
+    //         }
+    //     }
+    //     double maior = v[0];
+    //     int pos = -1;
+    //     for (int i = 1; i<=ultimaPos; i++){
+    //         if(v[i] > maior){
+    //             maior = v[i];
+                
+    //         }
+    //     }
+    // }
+
+
+    //1. inserir elemento em determinada posição **
     public void inserePos(double e, int pos){
         if (estaCheio()) redimensiona(v.length*2);
         if (estaVazio() || pos == ultimaPos + 1){

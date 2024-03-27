@@ -113,6 +113,36 @@ public class Lista {
         }
         return aux;
     }
+    
+    public Retorno encontraMaior(){
+        Retorno r = new Retorno(); // nesse caso a primeira coisa é instanciar um novo objeto do tipo de retorno que desejamos.
+        // checar se a lista está vazia
+        if(estaVazia()){
+            return r;
+        }
+            // se não esrtiver temos que varrer tudo e achar o elemento la dentro
+            // nesse ponto temos certeza que não esta vazia por que passou o teste acima
+            // nomeamos o 1° no da lista como maior
+        int maior = primeiro.getInfo();
+        No aux = primeiro.getProximo(); // Nosso auxiliar pega o valor do proximo
+        while( aux != null){
+            if(aux.getInfo() > maior){
+                maior = aux.getInfo();  // assim nós temos certeza que saimos com o maior
+            }
+            aux = aux.getProximo(); //caminha na lista
+            // na lista temos o primeiro que aponta para o proximo
+            // então para andar nos nomeamos um aux que aponta para o primeiro
+            // nós fazemos então aux.getProximo() para parar de apontar para o primeiro e apontar para o segundo
+                // nesse momento teremos opção de pegar a info ou ir para o próximo.
+        }
+        r.setAchou(true);
+        r.setContador(maior);
+        return r; // sempre tem para devolver o pacote que pegamos para usar
+    }
+
+    // public boolean removeMaior(){
+
+    // }
 
     @Override
     public String toString(){
