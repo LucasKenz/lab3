@@ -226,24 +226,25 @@ public class MeuVetor {
         return true;        
     }
 
+    // remover primeira ocorrencia de um elemento
+    public boolean removePrimeiraOcorrencia(double e){
+        if (estaVazio()) return false;
+        boolean achou = false;
+        int i = 0;
+       while ( i <= ultimaPos && !achou){
+           if (v[i] == e) achou = true;
+           else i++;
+        }    
+        if (!achou) return false;
+        //arrastar os elementos após a retirada
+        for (int j = i; j <= ultimaPos; j++){
+            v[j] = v[j+1];
+        }
+        ultimaPos--;
+        return true;
 
-    //1. inserir elemento em determinada posição **
-    public void inserePos(double e, int pos){
-        if (estaCheio()) redimensiona(v.length*2);
-        if (estaVazio() || pos == ultimaPos + 1){
-            adiciona(e);
-            return;
-        }
-        if (pos < 0 || pos > ultimaPos + 1) return;
-        for (int i = ultimaPos; i >= pos; i--){
-            // explique o for
-            // o for começa da ultima posição, e vai até a posição que eu quero inserir, e vai decrementando
-            v[i+1] = v[i]; 
-            // vai deslocando os elementos para a direita, para abrir espaço para o novo elemento
-        }
-        v[pos] = e;
-        ultimaPos++;
     }
+
 
     // Verificar quantas vezes um elemento aparece no vetor
     public int contaElemento(double e){
@@ -269,26 +270,6 @@ public class MeuVetor {
         return aux;
     }
 
-    //Remover a primeira ocorrência de um determinado elemento
-    public boolean removeElemento(double e){
-        if (estaVazio()) return false;
-        int pos = -1;
-        for (int i = 0; i <= ultimaPos; i++){
-            if (v[i] == e){
-                pos = i;
-                break;
-            }
-        }
-        if (pos == -1) return false;
-        // for (int i = pos; i < ultimaPos; i++){
-        //     v[i] = v[i+1];
-        // }
-        // ultimaPos--;
-        // if (v.length >= 10 && ultimaPos <= v.length/4){
-        //     redimensiona(v.length/2);
-        // }
-        return true;
-    }
 
     //Remover todas as ocorrências de um determinado elemento **
     public boolean removeElementoTodas(double e){
@@ -312,27 +293,23 @@ public class MeuVetor {
         return true;
     }
 
-    //Criar uma nova instância da classe, com as posições de ocorrência de um determinado elemento
-    public MeuVetor posicoesElemento(double e){
-        MeuVetor posicoes = new MeuVetor(v.length);
-        for (int i = 0; i <= ultimaPos; i++){
-            if (v[i] == e){
-                posicoes.adiciona(i);
+        //1. inserir elemento em determinada posição **
+        public void inserePos(double e, int pos){
+            if (estaCheio()) redimensiona(v.length*2);
+            if (estaVazio() || pos == ultimaPos + 1){
+                adiciona(e);
+                return;
             }
-        }
-        return posicoes;
-    }
-
-    // 7. Devolver o índice da primeira ocorrência de um determinado elemento
-    public int indiceElemento(double e){
-        if (estaVazio()) return -1;
-        for (int i = 0; i <= ultimaPos; i++){
-            if (v[i] == e){
-                return i;
+            if (pos < 0 || pos > ultimaPos + 1) return;
+            for (int i = ultimaPos; i >= pos; i--){
+                // explique o for
+                // o for começa da ultima posição, e vai até a posição que eu quero inserir, e vai decrementando
+                v[i+1] = v[i]; 
+                // vai deslocando os elementos para a direita, para abrir espaço para o novo elemento
             }
+            v[pos] = e;
+            ultimaPos++;
         }
-        return -1;
-    }    
        
 }
 
