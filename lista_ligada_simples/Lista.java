@@ -185,6 +185,8 @@ public class Lista {
             aux.setProximo(novo);
         }
     }
+    
+
 
     @Override
     public String toString(){
