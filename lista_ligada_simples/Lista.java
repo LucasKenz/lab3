@@ -167,6 +167,25 @@ public class Lista {
         return true;
     }
 
+    // insere em uma posição específica
+    public void insereP (int e, int pos){
+        No novo = new No(e);
+        if (pos == 1){
+            novo.setProximo(primeiro);
+            primeiro = novo;
+        }
+        else {
+            No aux = primeiro;
+            int cont = 1;
+            while (aux.getProximo() != null && cont < pos -1){
+                aux = aux.getProximo();
+                cont ++;
+            }
+            novo.setProximo(aux.getProximo());
+            aux.setProximo(novo);
+        }
+    }
+
     @Override
     public String toString(){
         String s = "lista: ";
