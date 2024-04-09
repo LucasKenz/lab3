@@ -144,6 +144,29 @@ public class Lista {
 
     // }
 
+    public boolean removePrimeraOcorrencia (int x){
+        if (estaVazia()) return false;
+        if (primeiro.getInfo() == x){
+            primeiro = primeiro.getProximo();
+            return true;
+        }
+        boolean achou = false;
+        No anterior = primeiro;
+        No atual = primeiro.getProximo();
+        while (atual != null && !achou){
+            if (atual.getInfo() == x){
+                achou = true;
+            }
+            else {
+                anterior = atual;
+                atual = atual.getProximo();
+            }
+        }
+        if (!achou) return false;
+        anterior.setProximo(atual.getProximo());
+        return true;
+    }
+
     @Override
     public String toString(){
         String s = "lista: ";
