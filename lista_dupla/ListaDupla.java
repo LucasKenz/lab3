@@ -57,4 +57,57 @@ public class ListaDupla {
         }
         return aux;
     }
+
+    public NoDuplo adicionaPos(int e, int pos){
+        NoDuplo novo = new NoDuplo(e);
+        cont = 1;
+        NoDuplo aux = primeiro;
+        while ( aux != null && cont != pos){
+            aux = aux.getProximo();
+            cont ++;
+        }
+        novo.setProximo(aux);
+        novo.setAnterior(aux.getAnterior());
+        novo.getProximo().setAnterior(novo);
+        novo.getAnterior().setProximo(novo);
+    }
+
+    public void removePos(int pos){
+        NoDuplo aux = primeiro;
+        cont = 1;
+        while (aux != null && cont != pos){
+            aux = aux.getProximo();
+            cont ++;
+        }
+        aux.getAnterior().setProximo(aux.getProximo());
+        aux.getProximo().setAnterior(aux.getAnterior());
+    }
+
+    public boolean removePrimeiraOcorrencia (int x){
+        if (estaVazia()) return false;
+        if (primeiro.getInfo() == x){
+            primeiro = primeiro.getProximo();
+            if (primeiro == null){
+                ultimo = null;
+            }
+            return true;
+        }
+        NoDuplo atual = primeiro.getProximo();
+        boolean achou = false;
+        while (atual != null && !achou){
+            if (atual.getInfo() == x) achou = true;
+            else atual = atual.getProximo();
+        }
+        if (!achou) return false;
+        if (atual == ultimo){
+            ultimo = ultimo.getAnterior();
+            ultimo.setProximo(null);
+        }
+        else{
+            atual.getAnterior().setProximo(atual.getProximo());
+            atual.getProximo().setAnterior(atual.getAnterior());
+        }
+        return true;
+    } 
+    
 }
