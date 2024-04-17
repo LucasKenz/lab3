@@ -136,13 +136,17 @@ public class MeuVetor {
         }
     }
 
+    public void resetVetor(){
+        ultimaPos = -1;
+    }
+
     int partition(int p, int r){ // pode ser somente void partition pois é somente de interesse da classe em que está
-        double x = v[r] //pivo é o ultimo valor do vetor
+        double x = v[r]; //pivo é o ultimo valor do vetor
         int i = p-1; // i vai ser a primeira posição -1, antes do i
         for (int j=p; j < r; j++){
             if(v[j] <= x){ // se for isso vou fazer o i dar um passo para frente
                 //i = i+1; 
-                double aux = v[++i] // //atualiza o valor de i, troca os valores, faz o vetor andar em valor para a direita
+                double aux = v[++i]; // //atualiza o valor de i, troca os valores, faz o vetor andar em valor para a direita
                 v[i] = v[j];
                 v[j] = aux;
 
@@ -155,8 +159,10 @@ public class MeuVetor {
     }
     public void quicksort(int p, int r){
         // agora vem o quick sort
+        System.out.println("p = " + p + ", r = " + r);
         if (p < r){ // se houver pelo menos duas posições, se a primeira posição for menor que a ultima posição
             int q = partition(p, r); // q recebe o resultado do partition usando p e r, o i, do return i, a posição do pivo
+            System.out.println("q = " + q);
             quicksort(p, q-1); // representa a parte da primeira posição até q-1, ou seja a posição de q-1 (posição do pivo - 1), parte a esquerda do pivo
             quicksort(q+1, r); // representa a parte a direita
             // valores são trocados no partition, e posições no quicksort
@@ -166,24 +172,24 @@ public class MeuVetor {
 
 
 
-    //construir um método para encontrar o maior elemento e devolvê-lo (usar a classe retorno)
-    public Retorno encontraMaior(){
-        Retorno r = new Retorno();
-        if (estaVazio()){
-            r.setAchou(false);
-            return r;
-        }
-        double maior = v[0];
-        for (int i = 1; i<=ultimaPos; i++){ // vai do 2 para frente, do indice 1 para frente por causda de i = 1
-            if(v[i] > maior){
-                maior = v[i];
-            }
-            r.setCont(maior);
-            r.getCont();
-        }
-        return r;
-         // mudei o cont e o get cont para double
-    }
+    // //construir um método para encontrar o maior elemento e devolvê-lo (usar a classe retorno)
+    // public Retorno encontraMaior(){
+    //     Retorno r = new Retorno();
+    //     if (estaVazio()){
+    //         r.setAchou(false);
+    //         return r;
+    //     }
+    //     double maior = v[0];
+    //     for (int i = 1; i<=ultimaPos; i++){ // vai do 2 para frente, do indice 1 para frente por causda de i = 1
+    //         if(v[i] > maior){
+    //             maior = v[i];
+    //         }
+    //         r.setCont(maior);
+    //         r.getCont();
+    //     }
+    //     return r;
+    //      // mudei o cont e o get cont para double
+    // }
 
     //construir um metodo para encontrar o maior e remover da lista
     public boolean removeMaior(){
