@@ -20,6 +20,10 @@ int fibonacci (int n){
     
     // para n <= 1, retorna 1
     // para fib(n-1) + fib(n-2), para n > 1    
+    if (n<=1) return 1;
+    
+    return fibonacci(n-1) + fibonacci(n-2); // temos uma chamada dupla, temos uma árvore de decisão, utilização de memória fica sofrida
+    
 }
 
 
@@ -30,8 +34,12 @@ int main (){
     //     printf("fatorial de %d = %.0f\n", i, fatorial(i)); // .0f é nenhuma casa decimal depois da virgulas de um float nesse caso.
     // }   
     
-    for (int i=0; i<13; i++){
-        printf("fatorial de %d = %d\n", i, fat_rec(i));
+    // for (int i=0; i<13; i++){
+    //     printf("fatorial de %d = %d\n", i, fat_rec(i));
+    // }
+    for (int i=1; i<20; i++){
+        printf("fibonacci em %d = %d\n", i, fibonacci(i));
     }
+
     return 0;
 }
