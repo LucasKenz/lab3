@@ -171,7 +171,60 @@ public class MeuVetor {
         }
     }
 
+    // merge sort
+    public void mergeSort() {
+        mergeSort(0, ultimaPos);
+    }
 
+    void mergeSort(int l, int r) {
+        if (l < r) {
+            int m = (l + r) / 2;
+            mergeSort(l, m);
+            mergeSort(m + 1, r);
+            merge(l, m, r);
+        }
+    }
+
+    void merge(int l, int m, int r) {
+        int n1 = m - l + 1;
+        int n2 = r - m;
+
+        double L[] = new double[n1];
+        double R[] = new double[n2];
+
+        for (int i = 0; i < n1; ++i) {
+            L[i] = v[l + i];
+        }
+        for (int j = 0; j < n2; ++j) {
+            R[j] = v[m + 1 + j];
+        }
+
+        int i = 0, j = 0;
+
+        int k = l;
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                v[k] = L[i];
+                i++;
+            } else {
+                v[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < n1) {
+            v[k] = L[i];
+            i++;
+            k++;
+        }
+
+        while (j < n2) {
+            v[k] = R[j];
+            j++;
+            k++;
+        }
+    }
 
     // //construir um método para encontrar o maior elemento e devolvê-lo (usar a classe retorno)
     // public Retorno encontraMaior(){
