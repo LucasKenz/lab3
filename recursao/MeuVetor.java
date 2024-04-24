@@ -159,7 +159,8 @@ public class MeuVetor {
     }
     public void quicksort(int p, int r){
         // agora vem o quick sort
-        // System.out.println("p = " + p + ", r = " + r);
+        System.out.println("p = " + p + ", r = " + r);
+        System.out.println(this);
         if (p < r){ // se houver pelo menos duas posições, se a primeira posição for menor que a ultima posição
             int q = partition(p, r); // q recebe o resultado do partition usando p e r, o i, do return i, a posição do pivo
             System.out.println("q = " + q);
