@@ -17,6 +17,7 @@ public class testeFila {
 
             }
             System.out.println(f);
+            System.out.println(f.toStringVetor());
         } while (!f.estaVazia());
 
     }

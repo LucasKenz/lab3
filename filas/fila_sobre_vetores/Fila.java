@@ -70,4 +70,33 @@ public class Fila {
         }
         return s;
     }
+    public String toStringVetor(){
+        if (estaVazia()) return "_ _ _ _ _ _ _ _ _ _";
+        int i;
+        String s = "";
+        if (primeiro<= ultimo){
+            for (i=0; i < primeiro; i++){
+                s += "_ ";
+            }
+            for ( i = primeiro; i <= ultimo; i++){
+                s += dados[i] + " ";
+            }
+            for (i=ultimo+1; i<dados.length; i++){
+                s += "_ ";
+            }
+        }
+        else {
+            for (i=0; i<=ultimo; i++){
+                s +=  dados[i] + " ";
+            }
+            for (i=ultimo+1; i<primeiro; i++){
+                s += "_ ";
+            }
+            for (i=primeiro; i<dados.length; i++){
+                s += dados[i] + " ";
+            }
+
+        }
+        return s;
+    }
 }
