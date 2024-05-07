@@ -53,14 +53,15 @@ public class FilaGenerica <E> {
         return info;
     }
 
+    @Override
     public String toString () {
         if (estaVazia()) return "fila vazia";
         String s = "";
         int i = primeiro;
-        while (i != proxima(ultimo)){
+        do {
             s = s + dados[i] + "\n";
             i = proxima(i);
-        }
+        } while (i != proxima(ultimo));
         return s;
     }
 }

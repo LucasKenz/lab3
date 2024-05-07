@@ -1,4 +1,29 @@
-public class Fila {
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner (System.in);
+        int n = sc.nextInt(); // precisamos do scanner pois não há entrada, os números para testes estarão num arquivo no site
+        Fila entrada = new Fila(n);
+        for (int i = 1; i <= n; i++){
+            entrada.enfileira(i);
+        }
+        Fila descartados =  new Fila(n);
+        while ( entrada.getTamanho() >= 2){
+            // tirar da entrada e jogar na descartadas
+            descartados.enfileira(entrada.desinfileira()); // tira da entrada e joga na descartado
+            // temos que jogar a proxima na primeira
+            entrada.enfileira(entrada.desinfileira());
+
+            // a parte mais importante é o print ser igual ao que ta la, maiusculo, minusculo, espaços, dois pontos, virgula, tudo igual
+        }
+        System.out.println("Discarded cards: " + descartados);
+        System.out.println("Remaining card: " + entrada);
+        sc.close();
+    }
+}
+
+class Fila {
     private int[] dados;
     private int primeiro;
     private int ultimo;
@@ -63,12 +88,13 @@ public class Fila {
         if (estaVazia()) return "fila vazia";
         String s = "";
         int i = primeiro;
-        do {
+        while (i != ultimo){
             // não podemos usar <+, pois não temos mais essa comparação, já foi usada em cima
-            s = s + dados[i] + " ";
+            s = s + dados[i] + ", ";
             i = proxima(i);
             // nessa situação meu i != ultimo, está errada, pois ao chegar no ultimo apra a volta sem completar a volta, então preciso olhar para a frente do ultimo  
-        }while (i != proxima(ultimo));
+        }
+        s += dados[i]; // por que queremos o último sem vírgula e sem espaço também
         return s;
     }
     public String toStringVetor(){
