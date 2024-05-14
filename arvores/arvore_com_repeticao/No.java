@@ -8,6 +8,7 @@ public class No {
 
     public No (int info){
         this.info = info;
+        this.quantidade = 1;
     }
     public int getInfo() {
         return info;
@@ -27,10 +28,18 @@ public class No {
     public void setDireita(No direita) {
         this.direita = direita;
     }
-
+    public void incrementaQuantidade(){
+        quantidade ++;
+    }
+    public void decrementaQuantidade(){
+        quantidade --;
+    }
+    public int getQuantidade(){
+        return quantidade;
+    }
     @Override
     public String toString() {
-        return "[" + info +  "]";
+        return " [info=" + info + ", quantidade=" + quantidade + "]";
     }
    
 }
