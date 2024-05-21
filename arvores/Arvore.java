@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Arvore {
     private No raiz; // ponteiro
     // teste para se a riaz está vazia, é null
@@ -76,6 +78,53 @@ public class Arvore {
         return alturaEsquerda > alturaDreita ? alturaEsquerda + 1 : alturaDreita + 1;
         // o return é baseado na pergunta: minha altura da esquerda é maior que o da direita? se sim devolve a altura da esquerda +1 se não a direita + 1.
 
+    }
+
+    public int numeroFolhas(){
+        if (estaVazia()) return 0;
+        return numeroFolhasRec(raiz);
+    }
+
+    // int numeroFolhasRec(No atual){
+    //     if (atual.getDireita() == null && atual.getEsquerda() == null)
+    //         return 1;
+    //     int folhasDireita=0, folhasEsquerda=0;
+    //     if (atual.getDireita() != null){
+    //         folhasDireita = numeroFolhasRec(atual.getDireita()); // chamar recrsivamente para a direita 
+    //     }
+    //     if (atual.getEsquerda() != null){
+    //         folhasEsquerda = numeroFolhasRec(atual.getEsquerda());
+    //     }
+    //     return folhasDireita + folhasEsquerda;
+    // }
+
+    int numeroFolhasRec(No atual){
+        if (atual != null){
+            if (atual.getDireita() == null && atual.getEsquerda() == null)
+                return 1;
+            return numeroFolhasRec(atual.getDireita()) + numeroFolhasRec(atual.getEsquerda()); 
+        }
+        return 0;
+    }
+
+    public boolean busca (int x){
+        if (estaVazia()) return false;
+        return buscaRec(raiz, x); // apartir da raiz busca o elemento x
+    }
+    boolean buscaRec (No atual, int x) {
+        if (atual != null) {
+            if (x == atual.getInfo()) return true; // nesse caso já encontramos o nó que queremos
+            if (x < atual.getInfo()){
+                return buscaRec (atual.getEsquerda(), x);
+            }
+            return buscaRec(atual.getEsquerda(), x); // nesse caso a busca vai para a esquerda em busca do x
+        }
+        return false; // não achamos
+    }
+
+    public int proximo (int x){
+        if (estaVazia()) return -1; // por convensão de projeto o retorno vai ser -1, pois tenho certeza que -1 não estará na arvore
+        ArrayList<Integer> lista = new ArrayList<>();
     }
 }
 
