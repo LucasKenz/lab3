@@ -117,14 +117,89 @@ public class Arvore {
             if (x < atual.getInfo()){
                 return buscaRec (atual.getEsquerda(), x);
             }
-            return buscaRec(atual.getEsquerda(), x); // nesse caso a busca vai para a esquerda em busca do x
+            return buscaRec(atual.getDireita(), x); // nesse caso a busca vai para a esquerda em busca do x
         }
         return false; // não achamos
     }
 
     public int proximo (int x){
         if (estaVazia()) return -1; // por convensão de projeto o retorno vai ser -1, pois tenho certeza que -1 não estará na arvore
-        ArrayList<Integer> lista = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>(); // array list é um vetor muito melhor
+        lineariza (lista, raiz); // tornando a árvore em linha, será um cursão, com a lista a partir da raiz
+        System.out.println(lista); // nunca devemos colcoar um print em um método / estrutura de dados
+        int posicao = lista.indexOf(x);
+        if (posicao != -1 && posicao != lista.size()-1){ // temos que checar se o elemento existe, que no caso se não existir é -1, e se não estamos na ultima posição, como? usando size que ja esta pronto no java doc
+
+            return lista.get(posicao +1);
+        }
+        return -1;
+
+        // ou com ternário
+
+        // return posicao != -1 && posicao != lista.size()-1 ?  lista.get(posicao +1) : -1;
+
+        // ou
+
+        // return posicao == -1 || posicao == lista.size() -1 ? -1 : lista.get(posicao+1);
+    }
+
+    void lineariza (ArrayList<Integer> lista, No atual){ // temos que especificar que nossa lista é um array list de lista
+        if (atual != null) {
+            // pergunta de segurança para saber que estamos num lugar seguro
+            lineariza(lista, atual.getEsquerda()); // chamamos o alinhar para a esquerda de baixo pra cima, recursivamente
+            lista.add(atual.getInfo()); // dessa maneira pegamos a raiz, que sempre será um nó não fixo, pega o mais a esquerda, volta pega o de cima, e vai para a direita de uma subárvore
+
+            lineariza(lista, atual.getDireita()); // depois de ir tudo para a direita, pega o mais a esquerda e subir, pegamos o mais a direita da subarvor mais a esquerda
+
+            
+        }
+
+    }
+
+    public boolean remove(int x){
+        // tem vários problemas e exceçoes que precisam ser tratadas
+        if ( estaVazia()) return false;
+        return removeRec(x, raiz, null, false); // usar o remove recursivo apartir da raiz (posição atual), do topo, desce e sobe
+        // null é usado para falar que o pai da raiz é null
+
+    }
+
+    boolean removeRec (int x, No atual, No pai, boolean eFilhoEsquerdo){ // para a remoção precisamos saber qual o atual e o pai dele que vai apontar para um novo, o x é removido, x numa posição atual e pai qualquer
+        if (atual != null){
+            if (x == atual.getInfo()){
+                if (atual.getEsquerda() == null && atual.getDireita() == null ){ // é folha, sem filhos
+                    if (eFilhoEsquerdo){
+                        pai.setEsquerda(null);
+                    }
+                    else {
+                        pai.setDireita(null);
+                    }
+                }
+                else if (atual.getEsquerda() == null){ // só tem o filho direito
+                    
+                }
+                else if (atual.getDireita() == null){ // so tem o filho esquerdo
+
+                }
+                else{ // tem os dois filhos
+
+                }
+            }
+            else if (x < atual.getInfo()){
+                return removeRec(x, atual.getEsquerda(), atual, true); // return resultado da BSUCA da esquerda
+                // perceba a diferença de legibilidade do de baixo para esse
+
+                // atualizo e passo direto as variáveis 
+            }
+            else{
+                eFilhoEsquerdo = false;
+                pai = atual; // o pai sempre será o atual
+                return removeRec(x, atual.getDireita(), pai, eFilhoEsquerdo); // return resultado da BSUCA da direita
+                // atualizo as variáveis e depois passo
+            }
+        }
+        return false;
+
     }
 }
 
