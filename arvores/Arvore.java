@@ -168,7 +168,10 @@ public class Arvore {
         if (atual != null){
             if (x == atual.getInfo()){
                 if (atual.getEsquerda() == null && atual.getDireita() == null ){ // é folha, sem filhos
-                    if (eFilhoEsquerdo){
+                    if (atual == raiz){ // refatoração para caso tiver dois filhos 
+                        raiz = null;
+                    }
+                    else if (eFilhoEsquerdo){
                         pai.setEsquerda(null);
                     }
                     else {
@@ -176,14 +179,55 @@ public class Arvore {
                     }
                 }
                 else if (atual.getEsquerda() == null){ // só tem o filho direito
+                    if (atual == raiz){ // refatoração para caso de ter os dois filhos
+                        raiz = atual.getDireita();
+                    }
+                    else if (eFilhoEsquerdo){ // ta chegando esquerdo
+                        
+                        pai.setEsquerda(atual.getDireita()); 
+                    }
+                    else { // ta chegando pela direita
+                        pai.setDireita(atual.getDireita()); 
+                    }
                     
                 }
                 else if (atual.getDireita() == null){ // so tem o filho esquerdo
-
+                    if (atual == raiz){
+                        raiz = atual.getEsquerda();
+                    }
+                    else if (eFilhoEsquerdo){
+                        pai.setEsquerda(atual.getEsquerda()); // é como se fizesse um pulo, seta a esquerda do pai para a esquerda do atual
+                    }
+                    else{
+                        pai.setDireita(atual.getEsquerda());
+                    }
                 }
                 else{ // tem os dois filhos
-
+                    // a subarvore da direita é adotada pelo nó pai
+                    if (atual == raiz){ // refatoração por causa da dois filhos
+                        raiz = atual.getDireita();
+                        }
+                    else if(eFilhoEsquerdo){
+                        pai.setEsquerda(atual.getDireita());
+                    }
+                    else {
+                        pai.setDireita(atual.getDireita());
+                    }
+                    // a subarovore da esquerda é adotada pelo sucessor
+                    // sucessor é o menor entre os maiores que o atual
+                    No sucessor = atual.getDireita(); // existe pois tenho dois filhos, se chegou nesse if eu sei que tenho dois filhos
+                    while (sucessor.getEsquerda() != null){
+                        sucessor = sucessor.getEsquerda();
+                        // qualquer mudança deve ser feita 3 vezes, uma vez para cada possibilidade
+                    }
+                    sucessor.setEsquerda(atual.getEsquerda());
+                    // funcionará com o método de la for
+                        // adicionamos um sucessor, o pai de todos sempre vai adotar os ramos da direita
+                        // o sucessor sempre vai adotar as suv arvores da esquerda
+                            // o sucessor sempre será o menor entre os maiores, um passo para a direita e tudo para a esquerda
                 }
+                //remoção independente do caso tenmos que devolver sucesso
+                return true;
             }
             else if (x < atual.getInfo()){
                 return removeRec(x, atual.getEsquerda(), atual, true); // return resultado da BSUCA da esquerda
@@ -197,6 +241,7 @@ public class Arvore {
                 return removeRec(x, atual.getDireita(), pai, eFilhoEsquerdo); // return resultado da BSUCA da direita
                 // atualizo as variáveis e depois passo
             }
+
         }
         return false;
 
